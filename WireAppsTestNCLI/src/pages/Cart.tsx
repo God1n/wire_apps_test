@@ -1,8 +1,8 @@
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {CompositeScreenProps} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import React from 'react';
-import {View, Text, FlatList, Alert, TouchableOpacity} from 'react-native';
+import React, {useMemo} from 'react';
+import {View, Text, FlatList, Alert} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {BottomTabStackParameterList} from '../routes/BottomTabStack';
 import {AppStackParameterList} from '../routes/AppStack';
@@ -10,6 +10,7 @@ import {useSelector} from 'react-redux';
 import {RootState} from '../state/store';
 import CartItemCard from '../components/cards/CartItemCard';
 import ActionButton from '../components/buttons/ActionButton';
+import {CartItemType} from '../../my-app';
 
 type ProductsScreenProps = CompositeScreenProps<
   BottomTabScreenProps<BottomTabStackParameterList, 'Cart'>,
@@ -31,15 +32,17 @@ const CartScreen: React.FC<ProductsScreenProps> = ({navigation}) => {
     }
   };
 
-  const getTotalAmount = () => {
+  const getTotalAmount = (cartItems: CartItemType[]) => {
     let total = 0;
     let currency = '';
-    items.forEach(item => {
+    cartItems.forEach(item => {
       total += Number.parseFloat(item.price.amount) * item.quantity;
       currency = item.price.currency;
     });
     return {amount: total, currency};
   };
+
+  const memoizedTotalPrice = useMemo(() => getTotalAmount(items), [items]);
 
   return (
     <SafeAreaView className="pb-[56px]">
@@ -59,8 +62,8 @@ const CartScreen: React.FC<ProductsScreenProps> = ({navigation}) => {
       />
       <View className="w-full h-[10%] bg-tertiary flex flex-row items-center justify-around">
         <Text className="text-black text-base">
-          Total Price: {getTotalAmount().amount.toFixed(2)}{' '}
-          {getTotalAmount().currency}
+          Total Price: {memoizedTotalPrice.amount.toFixed(2)}{' '}
+          {memoizedTotalPrice.currency}
         </Text>
         <ActionButton label="Checkout" />
       </View>
