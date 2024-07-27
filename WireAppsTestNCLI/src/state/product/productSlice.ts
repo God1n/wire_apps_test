@@ -1,19 +1,19 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import ApiService from '../../services/apiService';
 import {fireToast} from '../toast/toastSlice';
-import {Product} from '../../../my-app';
+import {iProductResponse, Product} from '../../../my-app';
 
 const apiService = new ApiService();
 
 interface ProductState {
   result: string;
-  data: Product[];
+  products: Product[];
   loading: boolean;
 }
 
 const initialState: ProductState = {
   result: '',
-  data: [],
+  products: [],
   loading: false,
 };
 
@@ -23,40 +23,43 @@ const productSlice = createSlice({
   reducers: {
     clear: state => {
       state.result = '';
-      state.data = [];
+      state.products = [];
       state.loading = false;
     },
   },
   extraReducers: builder => {
     builder
-      .addCase(fetchUserInfo.pending, state => {
-        state.data = [];
+      .addCase(fetchProductList.pending, state => {
+        state.products = [];
         state.loading = true;
       })
-      .addCase(fetchUserInfo.fulfilled, (state, action) => {
+      .addCase(fetchProductList.fulfilled, (state, action) => {
         state.result = action.payload.result;
-        state.data = action.payload.data;
+        state.products = action.payload.data;
         state.loading = false;
       })
-      .addCase(fetchUserInfo.rejected, (state, action) => {
-        state.data = [];
+      .addCase(fetchProductList.rejected, (state, action) => {
+        state.products = [];
         state.loading = false;
       });
   },
 });
 
-export const fetchUserInfo = createAsyncThunk(
+export const fetchProductList = createAsyncThunk(
   'product/fetchProductList',
   async (_state, {dispatch}) => {
     try {
-      const products = await apiService.get('/generator/userinfo');
+      const products = await apiService.get(
+        '/api.themeshplatform.com/products.json',
+      );
       if (products) {
-        return products as ProductState;
+        return products as iProductResponse;
       } else {
         fireToast(
           {
             title: 'Error',
-            message: 'There is an error with fetching product, Please try again.',
+            message:
+              'There is an error with fetching product, Please try again.',
             type: 'error',
           },
           dispatch,

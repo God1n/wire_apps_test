@@ -7,9 +7,11 @@ import BottomTabBarOne from '../components/elements/BottomTabsOne/BottomTabsOne'
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {BottomTabsIconMap} from '../components/elements/elementTypes';
 import {AppStackParameterList} from './AppStack';
+import {useSelector} from 'react-redux';
+import {RootState} from '../state/store';
 
 export type BottomTabStackParameterList = {
-  Products: undefined;
+  Discover: undefined;
   Cart: undefined;
 };
 
@@ -21,7 +23,7 @@ const screenOptions = {
 };
 
 const iconList: BottomTabsIconMap = {
-  Products: {
+  Discover: {
     name: 'view-list',
     group: 'MaterialCommunityIcons',
   },
@@ -34,12 +36,19 @@ const iconList: BottomTabsIconMap = {
 const BottomTabStack: React.FC<
   NativeStackScreenProps<AppStackParameterList, 'BottomTabs'>
 > = () => {
+  const {items} = useSelector((state: RootState) => state.cart);
   return (
     <Tab.Navigator
       screenOptions={screenOptions}
       tabBar={props => <BottomTabBarOne icons={iconList} {...props} />}>
-      <Tab.Screen name="Products" component={ProductsScreen} />
-      <Tab.Screen name="Cart" component={CartScreeen} />
+      <Tab.Screen name="Discover" component={ProductsScreen} />
+      <Tab.Screen
+        name="Cart"
+        component={CartScreeen}
+        options={{
+          tabBarBadge: items.length,
+        }}
+      />
     </Tab.Navigator>
   );
 };

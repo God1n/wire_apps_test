@@ -1,8 +1,7 @@
-import {Pressable} from 'react-native';
+import {Pressable, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import {IBottomTabIconButtonProps} from '../elementTypes';
 import VectorIcon from '../VectorIcon/VectorIcon';
-import styles from './styles';
 import Animated, {
   FadeInDown,
   FadeOutDown,
@@ -43,23 +42,36 @@ const IconButton: React.FC<IBottomTabIconButtonProps> = ({
       testID={options.tabBarTestID}
       onPress={onPress}
       onLongPress={onLongPress}
-      style={[styles.tabButtonContainer, options.tabBarItemStyle]}>
+      className="flex-1 flex-col items-center justify-start"
+      style={[options.tabBarItemStyle]}>
       <AnimatedVectorIcon
         type={icon?.group || 'MaterialIcons'}
         name={icon?.name || 'rocket'}
-        style={[
-          options.tabBarIconStyle,
-          styles.tabIcon,
-          animatedContainerStyle,
-        ]}
+        className={`text-[24px] text-white`}
+        style={[options.tabBarIconStyle, animatedContainerStyle]}
       />
       {!isFocused && (
         <Animated.Text
           entering={FadeInDown.duration(300)}
           exiting={FadeOutDown.duration(300)}
-          style={[styles.tabLabel, options.tabBarLabelStyle]}>
+          className={'text-[10px] mt-1 text-white'}
+          style={[options.tabBarLabelStyle]}>
           {label as string}
         </Animated.Text>
+      )}
+      {!isFocused && (
+        <Animated.View
+          entering={FadeInDown.duration(300)}
+          exiting={FadeOutDown.duration(300)}
+          className={`absolute top-[-16px] w-full flex items-center justify-center ${
+            !options.tabBarBadge && 'hidden'
+          }`}>
+          <View className="bg-septenary w-4 h-4 rounded-full  flex items-center justify-center ml-8">
+            <Text className="text-white text-xs text-center">
+              {options.tabBarBadge}
+            </Text>
+          </View>
+        </Animated.View>
       )}
     </Pressable>
   );

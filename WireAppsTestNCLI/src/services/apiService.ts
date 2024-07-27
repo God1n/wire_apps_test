@@ -55,7 +55,6 @@ class ApiService {
     data?: any,
     config?: AxiosRequestConfig,
   ): Promise<T> {
-    console.log(BASE_URL);
     const response: AxiosResponse<T> = await ApiService.axiosInstance.post(
       url,
       data,

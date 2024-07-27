@@ -1,36 +1,60 @@
-import React from 'react';
-import { View, Text, FlatList } from 'react-native';
+import React, {useEffect} from 'react';
+import {
+  View,
+  Text,
+  FlatList,
+} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../state/store';
+import {fetchProductList} from '../state/product/productSlice';
+import {Product} from '../../my-app';
+import {CompositeScreenProps} from '@react-navigation/native';
+import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {BottomTabStackParameterList} from '../routes/BottomTabStack';
+import {AppStackParameterList} from '../routes/AppStack';
+import ProductCard from '../components/cards/ProductCard';
 
-interface Product {
-    id: number;
-    name: string;
-    price: number;
-}
+type ProductsScreenProps = CompositeScreenProps<
+  BottomTabScreenProps<BottomTabStackParameterList, 'Discover'>,
+  NativeStackScreenProps<AppStackParameterList>
+>;
 
-const products: Product[] = [
-    { id: 1, name: 'Product 1', price: 10 },
-    { id: 2, name: 'Product 2', price: 20 },
-    { id: 3, name: 'Product 3', price: 30 },
-];
+const ProductsScreen: React.FC<ProductsScreenProps> = ({navigation}) => {
+  const dispatch = useDispatch<any>();
+  const {products} = useSelector((state: RootState) => state.product);
 
-const ProductsScreen: React.FC = () => {
-    const renderItem = ({ item }: { item: Product }) => (
-        <View>
-            <Text className='px-20 py-10'>{item.name}</Text>
-            <Text>{item.price}</Text>
-        </View>
-    );
+  useEffect(() => {
+    dispatch(fetchProductList());
+  }, [dispatch]);
 
-    return (
-        <View>
-            <Text>List of Products</Text>
-            <FlatList
-                data={products}
-                renderItem={renderItem}
-                keyExtractor={(item) => item.id.toString()}
-            />
-        </View>
-    );
+  const renderItem = ({item}: {item: Product}) => (
+    <ProductCard
+      item={item}
+      onPress={() => {
+        navigation.navigate('ProductDetails', {
+          product: item,
+        });
+      }}
+    />
+  );
+
+  const ItemSeparatorComponent = () => <View className="h-5 bg-transparent" />;
+  const ListFooterComponent = () => <View className="h-20 bg-transparent" />;
+
+  return (
+    <SafeAreaView className='bg-white'>
+      <Text className='ml-6 mt-2 mb-4 text-2xl text-black'>Discover our product here</Text>
+      <FlatList
+        data={products}
+        renderItem={renderItem}
+        ItemSeparatorComponent={ItemSeparatorComponent}
+        ListFooterComponent={ListFooterComponent}
+        keyExtractor={item => item.id.toString()}
+      />
+    </SafeAreaView>
+  );
 };
 
 export default ProductsScreen;

@@ -9,15 +9,6 @@ import {BottomTabNavigationOptions} from '@react-navigation/bottom-tabs';
 import {BottomTabStackParameterList} from '../../navigation/BottomTabStack';
 import {IconTypes} from './VectorIcon/VectorIconTypes';
 
-export interface IImageViewProps extends ImageProps {
-  /**
-   * local image source for placeholder if you have any image to show when onError triggers.
-   */
-  placeholder?: ImageSourcePropType;
-}
-
-export interface IDescriptionTextProps extends TextProps {}
-
 export interface IBottomTabIconButtonProps {
   icon?: {group: IconTypes; name: string};
   /**
@@ -52,18 +43,3 @@ export interface IBottomTabIconButtonProps {
 export type BottomTabsIconMap = {
   [key in keyof BottomTabStackParameterList]: {group: IconTypes; name: string};
 };
-
-export interface ITextButtonProps extends TouchableOpacityProps {
-  /**
-   * button text
-   */
-  label: string;
-  /**
-   * button container style
-   */
-  style?: ViewStyle;
-  /**
-   * button text style
-   */
-  textStyle?: TextStyle;
-}

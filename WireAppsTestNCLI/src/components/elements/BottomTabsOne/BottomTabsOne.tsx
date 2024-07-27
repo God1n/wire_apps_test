@@ -2,7 +2,6 @@
 import React, {useEffect} from 'react';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import {View, useWindowDimensions} from 'react-native';
-import styles from './styles';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -46,9 +45,12 @@ const BottomTabBarOne: React.FC<
     );
   }, [width]);
   return (
-    <View style={[styles.tabBarContainer]}>
-      <View style={[styles.tabBarAnimatedContainer]}>
-        <Animated.View style={[styles.animatedView, pointerStyle]} />
+    <View className="flex-row w-full h-[76px] self-center bg-gray items-center px-4 ios:h-[76px] ios:pb-4 android:h-[60px]">
+      <View className="absolute justify-center w-full bg-gray px-4 ios:h-[76px] ios:pb-4 android:h-[60px]">
+        <Animated.View
+          className="bg-tertiary h-[50px] rounded-full z-0"
+          style={[pointerStyle]}
+        />
       </View>
       {state.routes.map((route, index) => {
         const {options} = descriptors[route.key];
