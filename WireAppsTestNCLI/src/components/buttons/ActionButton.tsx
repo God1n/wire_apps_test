@@ -18,7 +18,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({
         orientation === 'landscape' ? 'h-fit' : 'h-10'
       }`}
       {...restProps}>
-      <Text className="text-black text-base">{label}</Text>
+      <Text className="text-white text-base">{label}</Text>
     </TouchableOpacity>
   );
 };
