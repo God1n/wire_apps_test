@@ -5,17 +5,31 @@ import {useDispatch} from 'react-redux';
 import {minus, plus} from '../../state/cart/cartSlice';
 
 interface QuentitySelectorProps {
+  /**
+   * Cart item to set quentity
+   */
   item: CartItemType;
 }
 
 const QuentitySelector: React.FC<QuentitySelectorProps> = ({item}) => {
   const dispatch = useDispatch();
+
+  /**
+   * on plus button press event handler
+   * @param item
+   */
   const onPressPlus = (item: CartItemType) => {
     dispatch(plus(item));
   };
+
+  /**
+   * on minus button press event handler
+   * @param item
+   */
   const onPressMinus = (item: CartItemType) => {
     dispatch(minus(item));
   };
+
   return (
     <View className="flex flex-row items-center justify-center">
       <Text className="text-black text-md">Quantity: </Text>

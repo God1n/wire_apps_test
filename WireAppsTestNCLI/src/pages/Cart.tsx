@@ -22,6 +22,10 @@ const CartScreen: React.FC<ProductsScreenProps> = ({navigation}) => {
   const {items} = useSelector((state: RootState) => state.cart);
   const {products} = useSelector((state: RootState) => state.product);
 
+  /**
+   * On press event handler for info button
+   * @param id 
+   */
   const onPressInfo = (id: string) => {
     const product = products.find(product => product.id === id);
     if (product) {
@@ -33,6 +37,11 @@ const CartScreen: React.FC<ProductsScreenProps> = ({navigation}) => {
     }
   };
 
+  /**
+   * Get total amount of the cart items
+   * @param cartItems 
+   * @returns {{amount: number, currency: string}}
+   */
   const getTotalAmount = (cartItems: CartItemType[]) => {
     let total = 0;
     let currency = '';

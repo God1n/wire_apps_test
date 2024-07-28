@@ -2,6 +2,9 @@ import {createSlice} from '@reduxjs/toolkit';
 import {CartItemType} from '../../../my-app';
 
 export interface CartState {
+  /**
+   * Cart items
+   */
   items: CartItemType[];
 }
 

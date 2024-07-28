@@ -2,8 +2,17 @@ import {View, Text, TouchableOpacity, FlatList} from 'react-native';
 import React from 'react';
 
 interface SizeSelectorProps {
+  /**
+   * Available sizes
+   */
   sizes: string[];
+  /**
+   * Selected size
+   */
   selectedSize: string;
+  /**
+   * Size selection event handler
+   */
   onSelectSize: (size: string) => void;
 }
 

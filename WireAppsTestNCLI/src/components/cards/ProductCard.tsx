@@ -3,7 +3,14 @@ import React from 'react';
 import {Product} from '../../../my-app';
 
 interface iProductCardProps {
+  /**
+   * Product to display
+   */
   item: Product;
+  /**
+   * On press event handler
+   * @returns 
+   */
   onPress: () => void;
 }
 

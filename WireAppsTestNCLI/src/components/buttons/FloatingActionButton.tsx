@@ -9,8 +9,18 @@ import VectorIcon from '../elements/VectorIcon/VectorIcon';
 import {IconTypes} from '../elements/VectorIcon/VectorIconTypes';
 
 interface FloatingActionButtonProps extends TouchableOpacityProps {
+  /**
+   * If true, the button will be hidden
+   */
   hidden: boolean;
+  /**
+   * On press event handler
+   * @returns 
+   */
   onPress: () => void;
+  /**
+   * Icon to display in the button
+   */
   icon?: {group: IconTypes; name: string};
 }
 

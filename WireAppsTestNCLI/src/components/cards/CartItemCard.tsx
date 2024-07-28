@@ -7,13 +7,23 @@ import {useDispatch} from 'react-redux';
 import {removeItem} from '../../state/cart/cartSlice';
 
 interface CartItemCardProps {
+  /**
+   * Cart item to display
+   */
   item: CartItemType;
+  /**
+   * On press event handler for info button
+   * @returns 
+   */
   onPressInfo: () => void;
 }
 
 const CartItemCard: React.FC<CartItemCardProps> = ({item, onPressInfo}) => {
   const dispatch = useDispatch();
 
+  /**
+   * On delete button press event handler
+   */
   const onDeletePress = () => {
     Alert.alert('Delete Item', 'Are you sure you want to remove this item?', [
       {

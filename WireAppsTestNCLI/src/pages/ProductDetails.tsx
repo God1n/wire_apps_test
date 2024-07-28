@@ -31,6 +31,9 @@ const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({route}) => {
   const {items} = useSelector((state: RootState) => state.cart);
   const [quantity, setQuantity] = React.useState<number>(1);
 
+  /**
+   * Add to cart event handler
+   */
   const addToCart = () => {
     const item: CartItemType = {
       id: product.id,

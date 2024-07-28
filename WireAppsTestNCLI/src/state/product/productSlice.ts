@@ -6,8 +6,17 @@ import {iProductResponse, Product} from '../../../my-app';
 const apiService = new ApiService();
 
 interface ProductState {
+  /**
+   * API response status
+   */
   result: string;
+  /**
+   * Products list
+   */
   products: Product[];
+  /**
+   * Loading state
+   */
   loading: boolean;
 }
 

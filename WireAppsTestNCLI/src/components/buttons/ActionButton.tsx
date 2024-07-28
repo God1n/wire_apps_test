@@ -3,6 +3,9 @@ import React from 'react';
 import useOrientation from '../../hooks/useOrientation';
 
 interface ActionButtonProps extends TouchableOpacityProps {
+  /**
+   * Button label
+   */
   label: string;
 }
 
