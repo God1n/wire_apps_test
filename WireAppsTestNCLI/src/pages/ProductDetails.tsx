@@ -1,12 +1,6 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  Image,
-  Alert,
-} from 'react-native';
+import {View, Text, ScrollView, Image, Alert} from 'react-native';
 import {AppStackParameterList} from '../routes/AppStack';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import SizeSelector from '../components/inputs/SizeSelector';
@@ -66,6 +60,7 @@ const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({route}) => {
         );
       } else {
         dispatch(add(item));
+        Alert.alert('Item added to cart', 'Item added to cart successfully');
       }
     }
   };
