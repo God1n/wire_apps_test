@@ -18,9 +18,10 @@ const HeaderRightButton: React.FC = () => {
 
   return (
     <TouchableOpacity
+      testID="header-right-button"
       onPress={onPress}
       className={`bg-quinary w-7 h-7 flex items-center justify-center rounded-md ${
-        !items.length && 'hidden'
+        !items?.length && 'hidden'
       }`}>
       <VectorIcon
         className="text-white"
@@ -30,7 +31,9 @@ const HeaderRightButton: React.FC = () => {
       />
       <View
         className={`absolute top-[-8px] right-[-8px] bg-septenary w-4 h-4 rounded-full  flex items-center justify-center ml-8`}>
-        <Text className="text-white text-xs text-center">{items.length}</Text>
+        <Text className="text-white text-xs text-center">
+          {items?.length || '0'}
+        </Text>
       </View>
     </TouchableOpacity>
   );

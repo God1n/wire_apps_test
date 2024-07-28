@@ -41,12 +41,13 @@ const CartItemCard: React.FC<CartItemCardProps> = ({item, onPressInfo}) => {
             {item.name}
           </Text>
           <Text className="text-black text-md">Size: {item.size}</Text>
-          <Text className="text-black text-md">
+          <Text testID='cart-item-unit-price' className="text-black text-md">
             Unit Price: {item.price.amount} <Text>{item.price.currency}</Text>
           </Text>
         </View>
         <View className="flex flex-col w-10 h-full items-center gap-2">
           <TouchableOpacity
+            testID="delete-button"
             onPress={onDeletePress}
             className="w-7 h-7 bg-quinary items-center justify-center rounded-md">
             <VectorIcon
@@ -57,6 +58,7 @@ const CartItemCard: React.FC<CartItemCardProps> = ({item, onPressInfo}) => {
             />
           </TouchableOpacity>
           <TouchableOpacity
+            testID="info-button"
             onPress={onPressInfo}
             className="w-7 h-7 bg-quinary items-center justify-center rounded-md">
             <VectorIcon

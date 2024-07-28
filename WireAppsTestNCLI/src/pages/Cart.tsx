@@ -11,6 +11,7 @@ import {RootState} from '../state/store';
 import CartItemCard from '../components/cards/CartItemCard';
 import ActionButton from '../components/buttons/ActionButton';
 import {CartItemType} from '../../my-app';
+import CartEmptyCard from '../components/cards/CartEmptyCard';
 
 type ProductsScreenProps = CompositeScreenProps<
   BottomTabScreenProps<BottomTabStackParameterList, 'Cart'>,
@@ -51,6 +52,7 @@ const CartScreen: React.FC<ProductsScreenProps> = ({navigation}) => {
         data={items}
         className="w-full h-[90%]"
         keyExtractor={item => item.id + item.size}
+        ListEmptyComponent={<CartEmptyCard />}
         renderItem={({item}) => (
           <CartItemCard
             item={item}

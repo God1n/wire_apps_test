@@ -22,7 +22,9 @@ const QuentitySetter: React.FC<QuentitySetterProps> = ({
     setQuentity(quentity - 1);
   };
   return (
-    <View className="flex flex-row items-center justify-start">
+    <View
+      testID="quentity-setter"
+      className="flex flex-row items-center justify-start">
       <Text className="text-lg mt-2 text-black">
         Quantity: {stockStatus !== 'IN STOCK' ? 'Unavalable' : ''}
       </Text>
@@ -35,7 +37,7 @@ const QuentitySetter: React.FC<QuentitySetterProps> = ({
           onPress={onPressMinus}>
           <Text className={`${'text-black text-lg'}`}>-</Text>
         </TouchableOpacity>
-        <Text className="text-black text-lg">{quentity}</Text>
+        <Text className="text-black text-lg">{quentity.toString()}</Text>
         <TouchableOpacity
           className={`w-8 h-8 items-center justify-center rounded-sm ${'bg-quatanary'}`}
           onPress={onPressPlus}>

@@ -10,6 +10,7 @@ interface iProductCardProps {
 const ProductCard: React.FC<iProductCardProps> = ({item, onPress}) => {
   return (
     <TouchableOpacity
+      testID="product-card"
       className="mx-5 bg-primary rounded-2xl android:shadow-2xl ios:shadow-md flex items-start justify-start flex-col overflow-hidden"
       onPress={onPress}>
       <View className="flex flex-row w-full items-center justify-center">

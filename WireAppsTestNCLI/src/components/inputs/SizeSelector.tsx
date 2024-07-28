@@ -22,6 +22,7 @@ const SizeSelector: React.FC<SizeSelectorProps> = ({
         ListEmptyComponent={() => <Text className="text-lg">Unavailable</Text>}
         renderItem={({item}) => (
           <TouchableOpacity
+            testID="size-option"
             className={`w-8 h-8 items-center justify-center rounded-sm ${
               selectedSize === item ? 'bg-quinary' : 'bg-secondary'
             }`}

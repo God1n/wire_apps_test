@@ -4,8 +4,6 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ProductDetailsScreen from '../pages/ProductDetails';
 import BottomTabStack from './BottomTabStack';
 import {Product} from '../../my-app';
-import {TouchableOpacity} from 'react-native';
-import VectorIcon from '../components/elements/VectorIcon/VectorIcon';
 import HeaderRightButton from '../components/buttons/HeaderRightButton';
 
 export type AppStackParameterList = {
