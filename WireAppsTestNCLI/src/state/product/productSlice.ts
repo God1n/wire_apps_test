@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import ApiService from '../../services/apiService';
-import {fireToast} from '../toast/toastSlice';
 import {iProductResponse, Product} from '../../../my-app';
+import {Alert} from 'react-native';
 
 const apiService = new ApiService();
 
@@ -64,25 +64,16 @@ export const fetchProductList = createAsyncThunk(
       if (products) {
         return products as iProductResponse;
       } else {
-        fireToast(
-          {
-            title: 'Error',
-            message:
-              'There is an error with fetching product, Please try again.',
-            type: 'error',
-          },
-          dispatch,
+        Alert.alert(
+          'Error',
+          'There is an error with fetching product, Please try again.',
         );
         throw new Error('No business categories found');
       }
     } catch (error) {
-      fireToast(
-        {
-          title: 'Error',
-          message: 'There is an error with fetching product, Please try again.',
-          type: 'error',
-        },
-        dispatch,
+      Alert.alert(
+        'Error',
+        'There is an error with fetching product, Please try again.',
       );
       throw new Error('No business categories found');
     }

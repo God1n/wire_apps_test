@@ -11,7 +11,6 @@ import {
 } from 'redux-persist';
 import storage from '@react-native-async-storage/async-storage';
 import productReducer from './product/productSlice';
-import toastReducer from './toast/toastSlice';
 import cartSlice from './cart/cartSlice';
 
 const cartConfig = {
@@ -26,7 +25,6 @@ export const store = configureStore({
   reducer: {
     product: productReducer,
     cart: cartReducer,
-    toast: toastReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
